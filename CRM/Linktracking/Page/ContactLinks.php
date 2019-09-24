@@ -20,17 +20,19 @@ class CRM_Linktracking_Page_ContactLinks extends CRM_Core_Page {
         -- count(t.url) clicks
       FROM
         civicrm_mailing m
-        LEFT JOIN civicrm_mailing_job j
+        JOIN civicrm_mailing_job j
           ON m.id = j.mailing_id
-        LEFT JOIN civicrm_mailing_event_queue q
+        JOIN civicrm_mailing_event_queue q
           ON j.id = q.job_id
-        LEFT JOIN civicrm_mailing_event_opened o
+        JOIN civicrm_mailing_event_opened o
           ON q.id = o.event_queue_id
-        LEFT JOIN civicrm_mailing_event_trackable_url_open ourl
+        JOIN civicrm_mailing_event_trackable_url_open ourl
           ON ourl.event_queue_id = o.id
-        LEFT JOIN civicrm_mailing_trackable_url t
+        JOIN civicrm_mailing_trackable_url t
           ON t.id = ourl.trackable_url_id
       WHERE t.url IS NOT NULL
+        AND m.is_completed = 1
+        AND m.url_tracking = 1
         AND q.contact_id = %1
       -- GROUP BY q.contact_id, t.mailing_id, t.url
       ORDER BY m.scheduled_date DESC";
