@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/contactlinks</path>
+    <page_callback>CRM_Linktracking_Page_ContactLinks</page_callback>
+    <title>ContactLinks</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>
